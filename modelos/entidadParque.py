@@ -5,4 +5,6 @@ class entidadParque(ABC):
         self.areaM2 = areaM2
         self.id = id
         self.nombre = nombre
-        self.dotacion = dotacion
+        self.dotacion = definirDotacion(self)
+        if self.dotacion is None:
+            raise ValueError("Dotaciòn no definida")
