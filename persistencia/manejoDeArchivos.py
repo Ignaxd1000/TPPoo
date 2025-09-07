@@ -1,16 +1,14 @@
-from excepciones.dotacion import definirDotacion 
-from modelos.entidadParque import entidadParque 
-
-def exportarDatos(dictEntidades, ruta):
-    with open(ruta, 'w') as archivo:
+def exportarDatos(dictEntidades):
+    open("Datos.txt", 'w').close()  # Limpia el archivo antes de escribir
+    with open("Datos.txt", 'w') as archivo:
         for id, entidad in dictEntidades.items():
-            linea = f"{entidad.id},{entidad.nombre},{entidad.areaM2},{definirDotacion(entidad.dotacion)}\n"
+            linea = f"{entidad.id},{entidad.nombre},{entidad.areaM2},{entidad.dotacion}\n"
             archivo.write(linea)
 
 def importarDatos(ruta):
     dictEntidades = {}
     try:
-        with open(ruta, 'r') as archivo:
+        with open("Datos.txt", 'r') as archivo:
             for linea in archivo:
                 id, nombre, areaM2, dotacion = linea.strip().split(',')
                 entidad = entidadParque(id, nombre, float(areaM2), int(dotacion))

@@ -5,7 +5,7 @@ def definirDotacion(entidad):
             dotacion = int(dotacion)  # Trato de convertir a entero
             if dotacion < 0:
                 print("El valor no puede ser negativo")
-            elif dotacion / entidad.areaM2 < 5:
+            elif dotacion / entidad.areaM2 < 2.5:
                 print("Dotaciòn muy baja para el área de la entidad")
             else:
                 break  # Salir del bucle si la dotación es válida

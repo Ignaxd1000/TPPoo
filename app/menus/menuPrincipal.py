@@ -1,7 +1,7 @@
 from app.menus.menuEntidades import menuEntidades
 # from app.menus.menuCalcularIngresos import menuCalcularIngresos
 from app.menus.menuBuscarEntidades import menuBuscarEntidades
-# from app.menus.menuExportarImportar import menuExportarImportar
+from app.menus.menuImportarExportar import menuExportarImportar
 
 def invocarMenu(entidadesDict):
     while True:
