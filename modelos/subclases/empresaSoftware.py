@@ -1,8 +1,8 @@
 from modelos.entidadParque import entidadParque
 
 class empresaSoftware(entidadParque):
-    def __init__(self, areaM2, id, nombre, dotacion, numEmpleados, tecnologias):
-        super().__init__(areaM2, id, nombre, dotacion)
+    def __init__(self, areaM2, id, nombre, numEmpleados, tecnologias):
+        super().__init__(areaM2, id, nombre)
         self.numEmpleados = numEmpleados
         self.tecnologias = tecnologias  # Las tecnologías que utiliza la empresa
         self.precioLicencia = 1000

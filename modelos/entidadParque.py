@@ -1,7 +1,8 @@
+from excepciones.dotacion import definirDotacion
 from abc import ABC
 
 class entidadParque(ABC):
-    def __init__(self, areaM2, id, nombre, dotacion):
+    def __init__(self, areaM2, id, nombre):
         self.areaM2 = areaM2
         self.id = id
         self.nombre = nombre

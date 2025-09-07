@@ -3,7 +3,7 @@ from modelos.rentable import Rentable
 
 class startup(entidadParque, Rentable):
     def __init__(self, areaM2, id, nombre, numFundadores, etapaDesarrollo):
-        super().__init__(areaM2, id, nombre, dotacion)
+        super().__init__(areaM2, id, nombre)
         self.numFundadores = numFundadores  # Número de fundadores de la startup
         self.etapaDesarrollo = etapaDesarrollo  # Etapa de desarrollo (e.g., idea, prototipo, mercado)
         self._rondasDeInversion = []
@@ -20,12 +20,11 @@ class startup(entidadParque, Rentable):
         self._rondaDeInversion.append(monto)
 
     def asociarse(self, laboratorio: 'laboratorio'): # Este lio asocia la startup con un laboratorio
-        capital = input("Ingrese el capital destinado a la asociaciòn: ") # Pido el capital que va a invertir la startup
-        for i in capital: 
-            if i.isalpha(): # Me fijo que la startup no cometa fraude(que me estè metiendo letras en vez de nùmeros)
-                raise ValueError("El capital debe ser un nùmero")
+        capital = input("Ingrese el capital destinado a la asociaciòn: ") # Pido el capital que va a invertir la startup 
+        if capital.isalpha(): # Me fijo que la startup no cometa fraude(que me estè metiendo letras en vez de nùmeros)
+            raise ValueError("El capital debe ser un nùmero")
         capital = int(capital)
-        if capital >= laboratorio._capitalNecesarioParaAsociacion:
+        if capital >= laboratorio.getCapitalNecesarioParaAsociacion(): # Si el capital es suficiente, hago la asociaciòn
             laboratorio._asociaciones.append(self)
             self._asociaciones.append(laboratorio)
             print(f"La startup {self.nombre} se ha asociado exitosamente con el laboratorio {laboratorio.nombre}.")

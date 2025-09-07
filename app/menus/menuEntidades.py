@@ -1,5 +1,6 @@
-from modelos.entidades import empresaSoftware, laboratorio, startup
-
+from modelos.subclases.empresaSoftware import empresaSoftware
+from modelos.subclases.laboratorio import laboratorio
+from modelos.subclases.startup import startup
 
 def menuEntidades(dictEntidades):
     while True:
@@ -19,24 +20,27 @@ def menuEntidades(dictEntidades):
                 id = input("ID: ")
                 nombre = input("Nombre: ")
                 areaM2 = float(input("Área en m²: "))
-                dotacion = int(input("Dotación: "))
-                entidad = empresaSoftware(areaM2, id, nombre, dotacion)
+                numEmpleados = int(input("Número de Empleados: "))
+                tecnologias = input("Tecnologías Utilizadas (separadas por comas): ").split(',')
+                entidad = empresaSoftware(areaM2, id, nombre, numEmpleados, tecnologias)
                 dictEntidades[id] = entidad
                 print(f"Entidad {nombre} agregada exitosamente.")
             elif tipo == '2':
                 id = input("ID: ")
                 nombre = input("Nombre: ")
                 areaM2 = float(input("Área en m²: "))
-                dotacion = int(input("Dotación: "))
-                entidad = laboratorio(areaM2, id, nombre, dotacion)
+                especialidad = input("Especialidad (biotecnología, física, química, etc.): ")
+                numInvestigadores = int(input("Número de Investigadores: "))
+                entidad = laboratorio(areaM2, id, nombre, especialidad, numInvestigadores)
                 dictEntidades[id] = entidad
                 print(f"Entidad {nombre} agregada exitosamente.")
             elif tipo == '3':
                 id = input("ID: ")
                 nombre = input("Nombre: ")
                 areaM2 = float(input("Área en m²: "))
-                dotacion = int(input("Dotación: "))
-                entidad = startup(areaM2, id, nombre, dotacion)
+                etapaDesarrollo = input("Etapa de Desarrollo: ")
+                numFundadores = int(input("Número de Fundadores: "))
+                entidad = startup(areaM2, id, nombre, numFundadores, etapaDesarrollo)
                 dictEntidades[id] = entidad
                 print(f"Entidad {nombre} agregada exitosamente.")
             else:
