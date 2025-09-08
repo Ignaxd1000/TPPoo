@@ -11,4 +11,10 @@ class laboratorio(entidadParque):
     def getCapitalNecesarioParaAsociacion(self):
         return self._capitalNecesarioParaAsociacion
 
+    def calcularIngresosAnuales(self):
+        # Supongamos que el laboratorio genera ingresos a través de proyectos de investigación
+        ingresosPorProyecto = 20000
+        numProyectos = len(self._asociaciones)  # Cada asociación puede representar un proyecto
+        return ingresosPorProyecto * numProyectos
+
     

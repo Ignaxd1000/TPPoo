@@ -1,5 +1,5 @@
 from excepciones.dotacion import definirDotacion
-from abc import ABC
+from abc import ABC, abstractclassmethod
 
 class entidadParque(ABC):
     def __init__(self, areaM2, id, nombre):
@@ -9,3 +9,7 @@ class entidadParque(ABC):
         self.dotacion = definirDotacion(self)
         if self.dotacion is None:
             raise ValueError("Dotaciòn no definida")
+
+    @abstractclassmethod
+    def calcularIngresosAnuales(self):
+        pass

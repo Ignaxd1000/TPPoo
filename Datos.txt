@@ -1,0 +1,17 @@
+[
+  {
+    "__module__": "modelos.subclases.startup",
+    "__class__": "startup",
+    "attrs": {
+      "areaM2": 10.0,
+      "id": "1",
+      "nombre": "xd",
+      "dotacion": 30,
+      "numFundadores": 2,
+      "etapaDesarrollo": "idea",
+      "_rondasDeInversion": [],
+      "ingresosPasados": [],
+      "_asociaciones": []
+    }
+  }
+]

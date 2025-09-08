@@ -1,5 +1,5 @@
 from app.menus.menuEntidades import menuEntidades
-# from app.menus.menuCalcularIngresos import menuCalcularIngresos
+from app.menus.menuCalcularIngresos import menuCalcularIngresos
 from app.menus.menuBuscarEntidades import menuBuscarEntidades
 from app.menus.menuImportarExportar import menuExportarImportar
 
