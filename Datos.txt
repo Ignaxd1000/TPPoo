@@ -1,12 +1,50 @@
 [
   {
+    "__module__": "modelos.subclases.empresaSoftware",
+    "__class__": "empresaSoftware",
+    "attrs": {
+      "areaM2": 100.0,
+      "id": "1",
+      "nombre": "CositoInc",
+      "dotacion": 30,
+      "numEmpleados": 30,
+      "tecnologias": [
+        "java",
+        "c++",
+        "assembly"
+      ],
+      "precioLicencia": 1000,
+      "licenciasVendidas": 0,
+      "_colaboraciones": [
+        "<modelos.subclases.laboratorio.laboratorio object at 0x7fe6940d9d30>"
+      ]
+    }
+  },
+  {
+    "__module__": "modelos.subclases.laboratorio",
+    "__class__": "laboratorio",
+    "attrs": {
+      "areaM2": 70.0,
+      "id": "2",
+      "nombre": "LaboPiola",
+      "dotacion": 4,
+      "especialidad": "jueguitos",
+      "numInvestigadores": 4,
+      "_capitalNecesarioParaAsociacion": 50000,
+      "_asociaciones": [],
+      "_colaboraciones": [
+        "<modelos.subclases.empresaSoftware.empresaSoftware object at 0x7fe6940d9be0>"
+      ]
+    }
+  },
+  {
     "__module__": "modelos.subclases.startup",
     "__class__": "startup",
     "attrs": {
-      "areaM2": 10.0,
-      "id": "1",
-      "nombre": "xd",
-      "dotacion": 30,
+      "areaM2": 60.0,
+      "id": "3",
+      "nombre": "MiyagiGames",
+      "dotacion": 2,
       "numFundadores": 2,
       "etapaDesarrollo": "idea",
       "_rondasDeInversion": [],

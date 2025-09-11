@@ -1,16 +1,22 @@
+class capacidadExcedidaException(Exception):
+    def __init__(self, message="La capacidad ha sido excedida. La dotaciòn debe ser mayor para el area disponible."):
+        super().__init__(message)
+
 def definirDotacion(entidad):
     while True:
-        dotacion = input(f"Ingrese la dotaciòn para {entidad.nombre}: ")
+        dotacion = input(f"Ingrese la dotación para {entidad.nombre}: ")
         try:
-            dotacion = int(dotacion)  # Trato de convertir a entero
+            dotacion = int(dotacion)
             if dotacion < 0:
                 print("El valor no puede ser negativo")
-            elif dotacion / entidad.areaM2 < 2.5:
-                print("Dotaciòn muy baja para el área de la entidad")
-            else:
-                break  # Salir del bucle si la dotación es válida
+                continue
+            if entidad.areaM2 / dotacion < 2.5:
+                raise capacidadExcedidaException("La dotación excede la capacidad permitida para el área asignada.")
+            break  # Sale del while solo si todo es válido
         except ValueError:
-            print("La dotaciòn debe ser un número entero positivo")  # Mensaje de error si no se puede convertir
+            print("Por favor ingrese un número entero válido.")
+        except capacidadExcedidaException as e:
+            print(e)
     return dotacion
 
 

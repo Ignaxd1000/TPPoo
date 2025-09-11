@@ -10,11 +10,9 @@ def menuExportarImportar(entidadesDict):
     opcion = input("Opción: ")
     if opcion == '1':
         exportarDatos(entidadesDict)
-        print("Datos exportados exitosamente.")
     elif opcion == '2':
         nuevasEntidades = importarDatos()
         entidadesDict.update(nuevasEntidades)
-        print("Datos importados exitosamente.")
     elif opcion == '3':
         return
     else:

@@ -7,6 +7,7 @@ class laboratorio(entidadParque):
         self.numInvestigadores = numInvestigadores  # Número de investigadores en el laboratorio
         self._capitalNecesarioParaAsociacion = 50000  # Capital mínimo necesario para asociarse con una startup
         self._asociaciones = []  # Lista de startups asociadas
+        self._colaboraciones = []  # Lista de colaboraciones con empresas de software
 
     def getCapitalNecesarioParaAsociacion(self):
         return self._capitalNecesarioParaAsociacion

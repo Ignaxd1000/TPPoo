@@ -28,6 +28,6 @@ def invocarMenu(entidadesDict):
             menuReportes(entidadesDict)
         elif opcion == '6':
             print("Saliendo del programa. ¡Hasta luego!")
-            break
+            return
         else:
             print("Opción no válida. Intente de nuevo.")

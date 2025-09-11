@@ -1,5 +1,7 @@
 from modelos.entidadParque import entidadParque
 from modelos.rentable import Rentable
+from excepciones.fondosInsuficientesException import fondosInsuficientesException
+
 
 class startup(entidadParque, Rentable):
     def __init__(self, areaM2, id, nombre, numFundadores, etapaDesarrollo):
@@ -12,22 +14,21 @@ class startup(entidadParque, Rentable):
 
     def calcularIngresosAnuales(self):
         ingresosAnuales = sum(self._rondasDeInversion) # Paso la cantidad de plata que levantaron en las rondas de inversión
-        (self._rondaDeInversion).clear() # Limpio las rondas de inversión para no contarlas dos veces
+        (self._rondasDeInversion).clear() # Limpio las rondas de inversión para no contarlas dos veces
         (ingresosPasados).append(ingresosAnuales) # Guardo los ingresos pasados para posibles futuros análisis
         return ingresoAnuales
 
     def añadirRondaDeInversion(self, monto):
-        self._rondaDeInversion.append(monto)
+        self._rondasDeInversion.append(monto)
 
-    def asociarse(self, laboratorio: 'laboratorio'): # Este lio asocia la startup con un laboratorio
-        capital = input("Ingrese el capital destinado a la asociaciòn: ") # Pido el capital que va a invertir la startup 
-        if capital.isalpha(): # Me fijo que la startup no cometa fraude(que me estè metiendo letras en vez de nùmeros)
-            raise ValueError("El capital debe ser un nùmero")
-        capital = int(capital)
-        if capital >= laboratorio.getCapitalNecesarioParaAsociacion(): # Si el capital es suficiente, hago la asociaciòn
-            laboratorio._asociaciones.append(self)
-            self._asociaciones.append(laboratorio)
+    def asociarse(self, laboratorio, capital):
+        if capital >= laboratorio.getCapitalNecesarioParaAsociacion():
+            if self not in laboratorio._asociaciones:
+                laboratorio._asociaciones.append(self)
+            if laboratorio not in self._asociaciones:
+                self._asociaciones.append(laboratorio)
             print(f"La startup {self.nombre} se ha asociado exitosamente con el laboratorio {laboratorio.nombre}.")
         else:
-            raise ValueError(f"El capital ingresado no es suficiente para la asociaciòn, se requieren como minimo {laboratorio.getCapitalNecesarioParaAsociacion()}")
-
+            raise fondosInsuficientesException(
+                f"El capital ingresado no es suficiente para la asociación, se requieren como mínimo {laboratorio.getCapitalNecesarioParaAsociacion()}"
+        )

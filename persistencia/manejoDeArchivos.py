@@ -102,7 +102,7 @@ def importarDatos(ruta: str | Path = "Datos.txt") -> Dict[Any, Any]:
                 key = str(len(dictEntidades) + 1)
 
             dictEntidades[key] = obj
-
+        print("Datos importados exitosamente.")
         return dictEntidades
 
     except Exception:
