@@ -4,7 +4,7 @@ Aplicación de consola para gestionar entidades de un parque tecnológico. Permi
 - Alta, modificación y baja de entidades (empresas de software, laboratorios, startups).
 - Búsqueda de entidades (si el menú correspondiente está implementado).
 - Exportación e importación de datos a/desde un archivo local.
-- (Nuevo) Generación de reportes agregados (si se incorpora el módulo de reportes sugerido más abajo).
+- Generación de reportes agregados.
 
 Este README describe supuestos, cómo ejecutar el proyecto, ejemplos de uso y cómo añadir reportes.
 
@@ -28,7 +28,10 @@ Supuestos actuales de persistencia:
 - `app/menus/`
   - `menuPrincipal.py`: Menú principal de la aplicación (función `invocarMenu`).
   - `menuEntidades.py`: ABM de entidades (alta, modificación, baja).
-  - Pueden existir otros menús como `menuBuscarEntidades.py`, `menuImportarExportar.py` si fueron añadidos.
+  - `menuBuscarEntidades.py`: Busqueda de entidades
+  - `menuCalcularIngresos.py`: Calcula los ingresos de entidades o el parque en su totalidad
+  - `menuImportarExportar.py`: Importa y Exporta datos desde un archivo con formato json pero en txt (XD, si funciona no lo pienso arreglar)
+  - `menuReportes`: Genera reportes en distintos formatos (este es el lio mayor...)
 - `modelos/`
   - `entidadParque.py`: Clase base abstracta para entidades del parque.
   - `subclases/`
@@ -39,7 +42,7 @@ Supuestos actuales de persistencia:
   - `dotacion.py`: Lógica para definir/calcular dotación de personal.
 - `persistencia/`
   - `manejoDeArchivos.py`: Exportación/Importación (CSV actual).
-- (Propuesto) `reportes/`
+- `reportes/`
   - `generadorReportes.py`: Cálculo y exportación de métricas agregadas (ver sección Reportes).
 
 
@@ -55,8 +58,6 @@ Notas:
   3) Buscar Entidades
   4) Exportar y/o Importar Datos
   5) Salir
-
-Si alguna opción aún no está implementada, el programa lo indicará o puede no funcionar correctamente.
 
 
 ## Uso del Menú de Entidades (ABM)
@@ -77,11 +78,6 @@ La dotación (`dotacion`) se calcula automáticamente a partir de las reglas def
 Menú:
 - “Exportar y/o Importar Datos” guarda o carga entidades de `Datos.txt`.
 
-Limitaciones actuales:
-- No se guardan atributos específicos de subclase.
-- No se almacena el tipo concreto, por lo que al reconstruir podrían crearse instancias genéricas si se cambia la lógica.
-
-
 ## Ejemplos rápidos
 
 Alta por menú (flujo típico):
@@ -95,13 +91,7 @@ Alta por menú (flujo típico):
    - Número de Empleados: `12`
    - Tecnologías Utilizadas: `Python,SQL,FastAPI`
 
-Exportar por menú:
-- “4. Exportar y/o Importar Datos” y elegí “Exportar”.
-
-
-## Reportes (Nuevo / Propuesto)
-
-Se propone añadir un módulo de reportes para obtener métricas agregadas del parque:
+## Reportes
 
 Métricas generales:
 - Total de entidades
@@ -123,90 +113,10 @@ Rankings:
 - Top 5 por área
 - Top 5 por dotación
 
-Formatos de salida sugeridos:
+Formatos de salida disponibles:
 - Texto plano (consola / archivo .txt)
 - CSV (tabla de entidades + métricas)
 - JSON (estructura completa para integraciones)
 - Markdown (reporte legible)
-
-### Estructura propuesta del módulo
-```
-reportes/
-  generadorReportes.py
-```
-
-### Ejemplo de uso (una vez creado el módulo)
-```python
-from reportes.generadorReportes import (
-    generar_resumen_texto,
-    exportar_reporte_texto,
-    exportar_reporte_json,
-    exportar_reporte_csv,
-    exportar_markdown
-)
-
-# dictEntidades es el diccionario principal ya cargado en memoria
-print(generar_resumen_texto(dictEntidades))
-exportar_reporte_texto(dictEntidades, "reporte.txt")
-exportar_reporte_json(dictEntidades, "reporte.json")
-exportar_reporte_csv(dictEntidades, "reporte.csv")
-exportar_markdown(dictEntidades, "reporte.md")
-```
-
-### Integración de menú (ejemplo)
-```python
-def menuReportes(entidades):
-    while True:
-        print("\n=== Menú Reportes ===")
-        print("1) Ver resumen en consola")
-        print("2) Exportar TXT")
-        print("3) Exportar JSON")
-        print("4) Exportar CSV")
-        print("5) Exportar Markdown")
-        print("6) Volver")
-        op = input("Opción: ").strip()
-        if op == "1":
-            from reportes.generadorReportes import generar_resumen_texto
-            print(generar_resumen_texto(entidades))
-        elif op == "2":
-            from reportes.generadorReportes import exportar_reporte_texto
-            exportar_reporte_texto(entidades)
-            print("Reporte TXT generado.")
-        elif op == "3":
-            from reportes.generadorReportes import exportar_reporte_json
-            exportar_reporte_json(entidades)
-            print("Reporte JSON generado.")
-        elif op == "4":
-            from reportes.generadorReportes import exportar_reporte_csv
-            exportar_reporte_csv(entidades)
-            print("Reporte CSV generado.")
-        elif op == "5":
-            from reportes.generadorReportes import exportar_markdown
-            exportar_markdown(entidades)
-            print("Reporte Markdown generado.")
-        elif op == "6":
-            break
-        else:
-            print("Opción inválida")
-```
-
-### Posibles mejoras futuras
-- Serializar también tipo y atributos específicos (migrar a JSON).
-- Añadir filtros por rango de área o dotación.
-- Gráficos (matplotlib / seaborn) si se permiten dependencias externas.
-- Exportación a PDF (ReportLab o HTML+wkhtmltopdf).
-- Cache de métricas si el volumen crece.
-
-
-## Roadmap de mejoras (ideas)
-- Persistir tipo de entidad y atributos específicos.
-- Validaciones más robustas de entrada de usuario.
-- Tests unitarios para lógica de cálculo de dotación y reportes.
-- Refactor para usar una capa de repositorio y facilitar cambios de persistencia (CSV -> JSON/SQLite).
-
-
 ## Licencia
-(Si aplica, agregar aquí el tipo de licencia del proyecto.)
-
----
-Si necesitás que también agregue el archivo del módulo de reportes al repositorio, pedímelo y preparo el cambio.
+MIT
