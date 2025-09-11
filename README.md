@@ -4,7 +4,7 @@ Aplicación de consola para gestionar entidades de un parque tecnológico. Permi
 - Alta, modificación y baja de entidades (empresas de software, laboratorios, startups).
 - Búsqueda de entidades (si el menú correspondiente está implementado).
 - Exportación e importación de datos a/desde un archivo local.
-- (Nuevo) Generación de reportes agregados (si se incorpora el módulo de reportes sugerido más abajo).
+- Generación de reportes agregados.
 
 Este README describe supuestos, cómo ejecutar el proyecto, ejemplos de uso y cómo añadir reportes.
 
@@ -113,7 +113,7 @@ Rankings:
 - Top 5 por área
 - Top 5 por dotación
 
-Formatos de salida sugeridos:
+Formatos de salida disponibles:
 - Texto plano (consola / archivo .txt)
 - CSV (tabla de entidades + métricas)
 - JSON (estructura completa para integraciones)
