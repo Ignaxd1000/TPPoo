@@ -119,7 +119,4 @@ Formatos de salida sugeridos:
 - JSON (estructura completa para integraciones)
 - Markdown (reporte legible)
 ## Licencia
-(Si aplica, agregar aquí el tipo de licencia del proyecto.)
-
----
-Si necesitás que también agregue el archivo del módulo de reportes al repositorio, pedímelo y preparo el cambio.
+MIT
